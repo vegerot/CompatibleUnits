@@ -1,0 +1,282 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='WolframDesktop 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       161,          7]
+NotebookDataLength[      9643,        274]
+NotebookOptionsPosition[      8714,        247]
+NotebookOutlinePosition[      9074,        263]
+CellTagsIndexPosition[      9031,        260]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Find a unit", "Subsection",
+ CellChangeTimes->{{3.7195298500636787`*^9, 
+  3.719529853441423*^9}},ExpressionUUID->"b890c3e4-74f7-4a27-b0f5-\
+32479e579326"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"table", "=", 
+    RowBox[{
+    "Keys", "[", "QuantityUnits`Private`$UnitReplacementRules", "]"}]}], 
+   ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"Panel", "[", 
+  RowBox[{"DynamicModule", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"search", "=", "\"\<\>\""}], "}"}], ",", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<Mathematica Unit Search:\>\"", ",", "Bold"}], "]"}], 
+        "]"}], ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "[", "search", "]"}], ",", "String", ",", 
+         RowBox[{"ContinuousAction", "\[Rule]", "True"}]}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{"Union", "@", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"StringCases", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"search", "~~", "___"}]}], "]"}], "&"}], "/@", 
+            "table"}], "]"}]}], "//", "Column"}], "]"}]}], "}"}], "]"}]}], 
+   "]"}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.719528007475801*^9, 3.719528024976598*^9}, {
+   3.719528090514409*^9, 3.719528139583664*^9}, {3.719528174255088*^9, 
+   3.7195282066367407`*^9}, 3.719528266167408*^9, {3.719528399281987*^9, 
+   3.7195284023024*^9}, {3.719528473909408*^9, 3.719528498035019*^9}, {
+   3.71952855488636*^9, 3.7195285608674603`*^9}, {3.721046292707849*^9, 
+   3.72104631203646*^9}, {3.721046359870263*^9, 
+   3.7210463609387407`*^9}},ExpressionUUID->"c0207a6f-c304-4e99-93a5-\
+05fc795f866d"],
+
+Cell[BoxData[
+ PanelBox[
+  DynamicModuleBox[{$CellContext`search$$ = ""}, 
+   TagBox[GridBox[{
+      {
+       InterpretationBox[Cell[BoxData[
+         FormBox[
+          StyleBox["\<\"Mathematica Unit Search:\"\>",
+           StripOnInput->False,
+           FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+         "4c23fc4a-f604-41fc-9f08-c8c2d49d58a3"],
+        Text[
+         Style["Mathematica Unit Search:", Bold]]]},
+      {
+       InputFieldBox[Dynamic[$CellContext`search$$], String,
+        ContinuousAction->True]},
+      {
+       DynamicBox[ToBoxes[
+         Column[
+          Union[
+           Flatten[
+            Map[StringCases[#, 
+              StringExpression[$CellContext`search$$, 
+               BlankNullSequence[]]]& , $CellContext`table]]]], StandardForm],
+        
+        ImageSizeCache->{299., {39433.4169921875, 39438.5830078125}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   DynamicModuleValues:>{}]]], "Output",
+ CellChangeTimes->{3.7210463127057123`*^9, 
+  3.7210463612500887`*^9},ExpressionUUID->"5b2435fa-7a05-4fe6-bb37-\
+7cbc0a842e0b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["All compatible units", "Subsection",
+ CellChangeTimes->{{3.719529857925748*^9, 
+  3.719529860039276*^9}},ExpressionUUID->"4422aabe-2b37-459f-9351-\
+8910c880d186"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"unitTable", "=", 
+   RowBox[{"Association", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "\[Rule]", 
+       RowBox[{"UnitDimensions", "[", "#", "]"}]}], "&"}], "/@", "table"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"compatibleUnits", "[", "unit_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"compatibleUnits", "[", "unit", "]"}], "=", 
+   RowBox[{"Keys", "[", 
+    RowBox[{"Select", "[", 
+     RowBox[{"unitTable", ",", " ", 
+      RowBox[{
+       RowBox[{"#", "\[Equal]", 
+        RowBox[{"UnitDimensions", "[", 
+         RowBox[{"Quantity", "[", "unit", "]"}], "]"}]}], "&"}]}], "]"}], 
+    "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Panel", "[", 
+  RowBox[{"DynamicModule", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"unit", "=", "\"\<Meters\>\""}], ",", 
+      RowBox[{"search", "=", "\"\<\>\""}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Column", "[", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Text", "[", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<Mathematica Compatible Unit Search:\>\"", ",", "Bold"}],
+          "]"}], "]"}], ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "[", "unit", "]"}], ",", "String"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Text", "[", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<Refine Search:\>\"", ",", "Bold"}], "]"}], "]"}], ",", 
+       RowBox[{"InputField", "[", 
+        RowBox[{
+         RowBox[{"Dynamic", "[", "search", "]"}], ",", "String", ",", 
+         RowBox[{"ContinuousAction", "\[Rule]", "True"}]}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{"Union", "@", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"StringCases", "[", 
+              RowBox[{
+               RowBox[{"ToLowerCase", "[", "#", "]"}], ",", 
+               RowBox[{
+                RowBox[{"ToLowerCase", "[", "search", "]"}], "~~", "___"}]}], 
+              "]"}], "&"}], "/@", 
+            RowBox[{"compatibleUnits", "[", "unit", "]"}]}], "]"}]}], "//", 
+         "TableForm"}], "]"}]}], "}"}], "]"}]}], "]"}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.719528567837577*^9, 3.719528643806443*^9}, {
+   3.719528723038356*^9, 3.719528727059558*^9}, {3.719528822527897*^9, 
+   3.719528837225315*^9}, {3.719529864801362*^9, 3.719529873443171*^9}, {
+   3.719530070336999*^9, 3.7195300776506453`*^9}, 3.719530842245837*^9, {
+   3.7195309173825207`*^9, 3.71953092960448*^9}, {3.71953161522332*^9, 
+   3.7195316153579893`*^9}, {3.7210406352816877`*^9, 3.721040644452004*^9}, {
+   3.721046149866816*^9, 3.721046156768216*^9}, {3.72104624184893*^9, 
+   3.721046286092662*^9}},ExpressionUUID->"c550ac26-b1d9-4a8f-856a-\
+a3c595cba547"],
+
+Cell[BoxData[
+ PanelBox[
+  DynamicModuleBox[{$CellContext`unit$$ = "Meters", $CellContext`search$$ = 
+   ""}, 
+   TagBox[GridBox[{
+      {
+       InterpretationBox[Cell[BoxData[
+         FormBox[
+          StyleBox["\<\"Mathematica Compatible Unit Search:\"\>",
+           StripOnInput->False,
+           FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+         "ae456a48-1210-49f3-9f18-78184ccce15d"],
+        Text[
+         Style["Mathematica Compatible Unit Search:", Bold]]]},
+      {
+       InputFieldBox[Dynamic[$CellContext`unit$$], String]},
+      {
+       InterpretationBox[Cell[BoxData[
+         FormBox[
+          StyleBox["\<\"Refine Search:\"\>",
+           StripOnInput->False,
+           FontWeight->Bold], TextForm]], "InlineText",ExpressionUUID->
+         "53660184-864b-4baf-980d-23d52b5efba2"],
+        Text[
+         Style["Refine Search:", Bold]]]},
+      {
+       InputFieldBox[Dynamic[$CellContext`search$$], String,
+        ContinuousAction->True]},
+      {
+       DynamicBox[ToBoxes[
+         TableForm[
+          Union[
+           Flatten[
+            Map[StringCases[
+              ToLowerCase[#], 
+              StringExpression[
+               ToLowerCase[$CellContext`search$$], 
+               BlankNullSequence[]]]& , 
+             $CellContext`compatibleUnits[$CellContext`unit$$]]]]], 
+         StandardForm],
+        ImageSizeCache->{159., {5413.4169921875, 5418.5830078125}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   DynamicModuleValues:>{}]]], "Output",
+ CellChangeTimes->{
+  3.719531637716363*^9, 3.72104006492941*^9, {3.721040501355537*^9, 
+   3.721040546320697*^9}, 3.7210406620420713`*^9, 3.721046179863758*^9, 
+   3.7210462607203617`*^9, 
+   3.7210463083413553`*^9},ExpressionUUID->"28ff42e7-1919-4569-94d6-\
+37b1e27fae5d"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 651},
+WindowMargins->{{161, Automatic}, {47, Automatic}},
+FrontEndVersion->"11.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (September \
+11, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[583, 22, 161, 3, 54, "Subsection",ExpressionUUID->"b890c3e4-74f7-4a27-b0f5-32479e579326"],
+Cell[CellGroupData[{
+Cell[769, 29, 1653, 41, 157, "Input",ExpressionUUID->"c0207a6f-c304-4e99-93a5-05fc795f866d"],
+Cell[2425, 72, 1224, 34, 78987, "Output",ExpressionUUID->"5b2435fa-7a05-4fe6-bb37-7cbc0a842e0b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3698, 112, 168, 3, 54, "Subsection",ExpressionUUID->"4422aabe-2b37-459f-9351-8910c880d186"],
+Cell[CellGroupData[{
+Cell[3891, 119, 2869, 70, 283, "Input",ExpressionUUID->"c550ac26-b1d9-4a8f-856a-a3c595cba547"],
+Cell[6763, 191, 1923, 52, 10955, "Output",ExpressionUUID->"28ff42e7-1919-4569-94d6-37b1e27fae5d"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
